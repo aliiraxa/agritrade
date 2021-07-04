@@ -3,8 +3,6 @@
 <head>
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="author" content="ThemeStarz">
-
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700|Varela+Round" rel="stylesheet">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.css" type="text/css">
     <link rel="stylesheet" href="assets/fonts/font-awesome.css" type="text/css">
@@ -12,7 +10,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/user.css">
 
-	<title>Craigs - Easy Buy & Sell Listing HTML Template</title>
+	<title>Agritrade Project</title>
 
 </head>
 <body>
@@ -25,20 +23,8 @@
                 <!--============ Secondary Navigation ===============================================================-->
                 <div class="secondary-navigation">
                     <div class="container">
-                        <ul class="left">
-                            <li>
-                            <span>
-                                <i class="fa fa-phone"></i> +1 123 456 789
-                            </span>
-                            </li>
-                        </ul>
                         <!--end left-->
                         <ul class="right">
-                            <li>
-                                <a href="my-ads.html">
-                                    <i class="fa fa-heart"></i>My Ads
-                                </a>
-                            </li>
                             <li>
                                 <a href="sign-in.html">
                                     <i class="fa fa-sign-in"></i>Sign In
@@ -59,7 +45,7 @@
                 <div class="main-navigation">
                     <div class="container">
                         <nav class="navbar navbar-expand-lg navbar-light justify-content-between">
-                            <a class="navbar-brand" href="index.html">
+                            <a class="navbar-brand" href="index.php">
                                 <img src="assets/img/logo.png" alt="">
                             </a>
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -72,7 +58,7 @@
                                         <a class="nav-link" href="#">Home</a>
                                         <ul class="child">
                                             <li class="nav-item">
-                                                <a href="index.html" class="nav-link">Home 1</a>
+                                                <a href="index.php" class="nav-link">Home 1</a>
                                             </li>
                                             <li class="nav-item">
                                                 <a href="index-2.html" class="nav-link">Home 2</a>
@@ -1396,72 +1382,8 @@
     <!--end page-->
 
 
-        <!--*********************************************************************************************************-->
-        <!--************ FOOTER *************************************************************************************-->
-        <!--*********************************************************************************************************-->
-        <footer class="footer">
-            <div class="wrapper">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-5">
-                            <a href="#" class="brand">
-                                <img src="assets/img/logo.png" alt="">
-                            </a>
-                            <p>
-                                Farmer web portal has become the basic need for every farmer and customer as well. This portal basically working as a third party between customers and sellers. Customer can buy the products on the spot. It is actually a web base project we will make easier access for everyone. You will get information about the agriculture products from our site. 
-                            </p>
-                        </div>
-                        <!--end col-md-5-->
-                        <div class="col-md-3">
-                            
-                            
-                        </div>
-                        <!--end col-md-3-->
-                        <div class="col-md-4">
-                            <h2>Contact</h2>
-                            <address>
-                                <figure>
-                                   University Of Gujrat,<br>
-									GT Road Campus,<br>
-									Gujrat.
-                                </figure>
-                                <br>
-                                <strong>Email:</strong> <a href="#">19010819-G3@uog.edu.pk</a>
-                                <br>
-                                <strong>Mobile: </strong> +92 333 1042473
-                                <br>
-                                <br>
-                                <a href="contact.html" class="btn btn-primary text-caps btn-framed">Contact Us</a>
-                            </address>
-                        </div>
-                        <!--end col-md-4-->
-                    </div>
-                    <!--end row-->
-                </div>
-                <div class="background">
-                    <div class="background-image original-size">
-                        <img src="assets/img/footer-background-icons.jpg" alt="">
-                    </div>
-                    <!--end background-image-->
-                </div>
-                <!--end background-->
-            </div>
-        </footer>
-        <!--end footer-->
-    </div>
-    <!--end page-->
+<?php
 
+include_once "includes/footer.php";
 
-	<script src="assets/js/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="assets/js/popper.min.js"></script>
-	<script type="text/javascript" src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyBEDfNcQRmKQEyulDN8nGWjLYPm8s4YB58&libraries=places"></script>
-    <!--<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>-->
-	<script src="assets/js/selectize.min.js"></script>
-	<script src="assets/js/masonry.pkgd.min.js"></script>
-	<script src="assets/js/icheck.min.js"></script>
-	<script src="assets/js/jquery.validate.min.js"></script>
-	<script src="assets/js/custom.js"></script>
-
-</body>
-</html>
+?>
