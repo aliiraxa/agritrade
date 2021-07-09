@@ -3,94 +3,36 @@
 <head>
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700|Varela+Round" rel="stylesheet">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.css" type="text/css">
     <link rel="stylesheet" href="assets/fonts/font-awesome.css" type="text/css">
     <link rel="stylesheet" href="assets/css/selectize.css" type="text/css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/user.css">
-
-	<title>Agritrade Project</title>
+    <title>Agritrade Project</title>
 
 </head>
 <body>
-
-    <div class="page home-page">
+    <div class="page sub-page">
         <!--*********************************************************************************************************-->
         <!--************ HERO ***************************************************************************************-->
         <!--*********************************************************************************************************-->
         <header class="hero">
             <div class="hero-wrapper">
                 <?php include_once "includes/navbar.php"; ?>
-
-                <!--============ End Main Navigation ================================================================-->
+                <!--end collapse-->
+                <!--============ End Hero Form ======================================================================-->
                 <!--============ Page Title =========================================================================-->
                 <div class="page-title">
                     <div class="container">
-                        <h1 class="opacity-40 center">
-                            <a href="#">Buy</a>, <a href="#">Sell</a> or <a href="#">Find</a> What You need
-                        </h1>
+                        <h1>Listing List Compact Full Width</h1>
                     </div>
                     <!--end container-->
                 </div>
                 <!--============ End Page Title =====================================================================-->
-                <!--============ Hero Form ==========================================================================-->
-                <form class="hero-form form">
-                    <div class="container">
-                        <!--Main Form-->
-                        <div class="main-search-form">
-                            <div class="form-row">
-                                <div class="col-md-3 col-sm-3">
-                                    <div class="form-group">
-                                        <label for="what" class="col-form-label">What?</label>
-                                        <input name="keyword" type="text" class="form-control" id="what" placeholder="What are you looking for?">
-                                    </div>
-                                    <!--end form-group-->
-                                </div>
-                                <!--end col-md-3-->
-                                <div class="col-md-3 col-sm-3">
-                                    <div class="form-group">
-                                        <label for="input-location" class="col-form-label">Where?</label>
-                                        <input name="location" type="text" class="form-control" id="input-location" placeholder="Enter Location">
-                                        <span class="geo-location input-group-addon" data-toggle="tooltip" data-placement="top" title="Find My Position"><i class="fa fa-map-marker"></i></span>
-                                    </div>
-                                    <!--end form-group-->
-                                </div>
-                                <!--end col-md-3-->
-                                <div class="col-md-3 col-sm-3">
-                                    <div class="form-group">
-                                        <label for="category" class="col-form-label">Category?</label>
-                                        <select name="category" id="category" data-placeholder="Select Category">
-                                            <option value="">Select Category</option>
-                                            <option value="1">Computers</option>
-                                            <option value="2">Real Estate</option>
-                                            <option value="3">Cars & Motorcycles</option>
-                                            <option value="4">Furniture</option>
-                                            <option value="5">Pets & Animals</option>
-                                        </select>
-                                    </div>
-                                    <!--end form-group-->
-                                </div>
-                                <!--end col-md-3-->
-                                <div class="col-md-3 col-sm-3">
-                                    <button type="submit" class="btn btn-primary width-100">Search</button>
-                                </div>
-                                <!--end col-md-3-->
-                            </div>
-                            <!--end form-row-->
-                        </div>
-                        <!--end main-search-form-->
-                       
-                    </div>
-                    <!--end container-->
-                </form>
-                <!--============ End Hero Form ======================================================================-->
-                <div class="background">
-                    <div class="background-image original-size">
-                        <img src="assets/img/hero-background-icons.jpg" alt="">
-                    </div>
-                    <!--end background-image-->
-                </div>
+                <div class="background"></div>
                 <!--end background-->
             </div>
             <!--end hero-wrapper-->
@@ -105,13 +47,18 @@
                 <div class="container">
                     <!--============ Section Title===================================================================-->
                     <div class="section-title clearfix">
-                        <div class="float-xl-left float-md-left float-sm-none">
-                            <h2>Recent Listings</h2>
+                        
+                        <div class="float-right d-xs-none thumbnail-toggle">
+                            <a href="#" class="change-class" data-change-from-class="list" data-change-to-class="grid" data-parent-class="items">
+                                <i class="fa fa-th"></i>
+                            </a>
+                            <a href="#" class="change-class active" data-change-from-class="grid" data-change-to-class="list" data-parent-class="items">
+                                <i class="fa fa-th-list"></i>
+                            </a>
                         </div>
-                       
                     </div>
                     <!--============ Items ==========================================================================-->
-                    <div class="items masonry grid-xl-4-items grid-lg-3-items grid-md-2-items">
+                    <div class="items list compact grid-xl-4-items grid-lg-3-items grid-md-2-items">
                         <div class="item">
                             <div class="ribbon-featured">Featured</div>
                             <!--end ribbon-->
@@ -576,7 +523,7 @@
                         </div>
                         <!--end item-->
 
-                        <a href="submit.php" class="item call-to-action">
+                        <a href="submit.html" class="item call-to-action">
                             <div class="wrapper">
                                 <div class="title">
                                     <i class="fa fa-plus-square-o"></i>
@@ -1096,21 +1043,50 @@
 
                     </div>
                     <!--============ End Items ======================================================================-->
-
-                    <div class="center">
-                        <a href="#" class="btn btn-primary btn-framed btn-rounded">Load More</a>
+                    <div class="page-pagination">
+                        <nav aria-label="Pagination">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <span aria-hidden="true">
+                                            <i class="fa fa-chevron-left"></i>
+                                        </span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                </li>
+                                <li class="page-item active">
+                                    <a class="page-link" href="#">1</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">2</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">3</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                        <span aria-hidden="true">
+                                            <i class="fa fa-chevron-right"></i>
+                                        </span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
+                    <!--end page-pagination-->
                 </div>
                 <!--end container-->
             </section>
             <!--end block-->
         </section>
         <!--end content-->
-    </div>
-    <!--end page-->
 
+        <!--*********************************************************************************************************-->
+        <!--************ FOOTER *************************************************************************************-->
+        <!--*********************************************************************************************************-->
 
-<?php
+        <?php
 
 include_once "includes/footer.php";
 

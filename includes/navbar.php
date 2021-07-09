@@ -1,3 +1,9 @@
+<?php
+include_once "config\session.php";
+include_once "config\database.php";
+
+?>
+
 <!--============ Secondary Navigation ===============================================================-->
 <div class="secondary-navigation">
     <div class="container">
@@ -47,20 +53,20 @@
                         <a class="nav-link" href="#">User Panel</a>
                         <ul class="child">
                             <li class="nav-item">
-                                <a href="my-profile.html" class="nav-link">My Profile</a>
+                                <a href="my-profile.php" class="nav-link">My Profile</a>
                             </li>
                             <li class="nav-item">
                                 <a href="my-ads.html" class="nav-link">My Listing</a>
                             </li>
                             <li class="nav-item">
-                                <a href="change-password.html" class="nav-link">Change
+                                <a href="change-password.php" class="nav-link">Change
                                     Password</a>
                             </li>
                         </ul>
 
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact</a>
+                        <a class="nav-link" href="contact.php">Contact</a>
                     </li>
                     <li class="nav-item">
                         <a href="book-training.html" class="btn btn-primary text-caps btn-rounded btn-framed">Book Training</a>

@@ -4,7 +4,7 @@ Class Database{
  public $host   = "localhost";
  public $user   = "root";
  public $pass   = "";
- public $dbname = "shop";
+ public $dbname = "agritrade";
  
  
  public $link;
