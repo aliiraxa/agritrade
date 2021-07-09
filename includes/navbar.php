@@ -4,12 +4,12 @@
         <!--end left-->
         <ul class="right">
             <li>
-                <a href="sign-in.html">
+                <a href="sign-in.php">
                     <i class="fa fa-sign-in"></i>Sign In
                 </a>
             </li>
             <li>
-                <a href="register.html">
+                <a href="register.php">
                     <i class="fa fa-pencil-square-o"></i>Register
                 </a>
             </li>
