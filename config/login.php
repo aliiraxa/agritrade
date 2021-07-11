@@ -47,9 +47,12 @@ Class Login
 
         $getEmail=$this->db->select("select * from users where email = '$email'");
         $getsEmail=$getEmail->fetch_assoc();
-        if($oldEmail==$getsEmail)
+        if($oldEmail==$email)
         {
-            $this->db->update("UPDATE users set title='$title',name='$name',img='$img',address='$address',about='$about',phone='$phone',email='$email' where id='$id'");
+            $this->db->update("UPDATE users set title='$title',name='$name',address='$address',about='$about',phone='$phone',email='$email' where id='$id'");
+            return "Update profile Successfully";
+        }else
+        {
 
         }
 
