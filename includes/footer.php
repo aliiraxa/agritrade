@@ -64,6 +64,12 @@ Farmer web portal has become the basic need for every farmer and customer as wel
 	<script src="assets/js/icheck.min.js"></script>
 	<script src="assets/js/jquery.validate.min.js"></script>
 	<script src="assets/js/custom.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready( function () {
+        $('#myTable').DataTable();
+    } );
+</script>
 
 </body>
 </html>
