@@ -206,7 +206,7 @@
                                 <a class="nav-link active icon" href="my-profile.php">
                                     <i class="fa fa-user"></i>My Profile
                                 </a>
-                                <a class="nav-link icon" href="my-ads.html">
+                                <a class="nav-link icon" href="seller_all_listing.php">
                                     <i class="fa fa-heart"></i>My Listing
                                 </a>
                                 <a class="nav-link icon" href="change-password.php">
