@@ -54,7 +54,7 @@
 
                     //image work here
                     $temp = explode(".", $_FILES["img"]["name"]);
-                    $newfilename = $title . '.' . end($temp);
+                    $newfilename = str_replace(' ', '', $title) . '.' . end($temp);
                     $target_dir = "assets/img/products/";
                     $target_file = $target_dir . $newfilename;
 

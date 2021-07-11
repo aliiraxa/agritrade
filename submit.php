@@ -46,7 +46,7 @@
 
                     //image work here
                     $temp = explode(".", $_FILES["img"]["name"]);
-                    $newfilename = $title . '.' . end($temp);
+                    $newfilename = str_replace(' ', '', $title) . '.' . end($temp);
                     $target_dir = "assets/img/products/";
                     $target_file = $target_dir . $newfilename;
 
@@ -151,6 +151,7 @@
                                             <option value="">Select Category</option>
                                             <?php
                                                 $cat=$m->getAllCategroy();
+
                                                 while ($cats=$cat->fetch_assoc())
                                                 {
                                             ?>

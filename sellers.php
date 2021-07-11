@@ -71,7 +71,7 @@
                                             <h3>
                                                 <a  class="title"><?php echo $seller['name']; ?></a>
                                             </h3>
-                                            <a href="single-listing-1.html" class="image-wrapper background-image">
+                                            <a  class="image-wrapper background-image">
                                                 <?php
                                                     if(!$seller['img'])
                                                     {

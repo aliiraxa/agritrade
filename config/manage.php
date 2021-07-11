@@ -74,6 +74,14 @@ Class Manage
         return $cat['name'];
 
     }
+
+    function getSellerById($id)
+    {
+        $get=$this->db->select("select name from users where id='$id'");
+        $cat=$get->fetch_assoc();
+        return $cat['name'];
+
+    }
     function getProductById($id)
     {
         return $this->db->select("select * from product where id='$id'");
@@ -96,6 +104,37 @@ Class Manage
     {
         return $this->db->select("select * from users where role=1");
     }
+
+    function getRandomHomePage()
+    {
+        return $this->db->select("SELECT * FROM product ORDER BY RAND() LIMIT 20");
+    }
+    function getThreeRandom()
+    {
+        return $this->db->select("SELECT * FROM product ORDER BY RAND() LIMIT 3");
+    }
+
+    function research($name,$location,$cat=0)
+    {
+
+
+
+       if($cat==0)
+       {
+           return $this->db->select("SELECT * FROM product WHERE title LIKE'%" . $name . "%'
+        OR city LIKE '%" . $location . "%'
+        OR district LIKE '%" . $location . "%'");
+       }else
+       {
+           return $this->db->select("SELECT * FROM product WHERE title LIKE'%" . $name . "%'
+        OR city LIKE '%" . $location . "%'
+        OR district LIKE '%" . $location . "%' AND category='$cat'");
+       }
+
+
+    }
+
+
 
 
 
