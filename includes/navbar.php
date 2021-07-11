@@ -59,7 +59,9 @@ Session::init();
                     <li class="nav-item">
                         <a class="nav-link" href="#">Stores</a>
                     </li>
-
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.php">Contact</a>
+                    </li>
                     <?php
                     if(Session::get('Login')==true)
                     {
@@ -70,9 +72,23 @@ Session::init();
                             <li class="nav-item">
                                 <a href="my-profile.php" class="nav-link">My Profile</a>
                             </li>
+                            <?php
+                            if(Session::get('role')==1)
+                            {
+                            ?>
                             <li class="nav-item">
                                 <a href="seller_all_listing.php" class="nav-link">My Listing</a>
                             </li>
+                            <?php } ?>
+
+                            <?php
+                            if(Session::get('role')==2)
+                            {
+                                ?>
+                                <li class="nav-item">
+                                    <a href="buyer_orders.php" class="nav-link">Buyer Order</a>
+                                </li>
+                            <?php } ?>
                             <li class="nav-item">
                                 <a href="change-password.php" class="nav-link">Change
                                     Password</a>
@@ -89,9 +105,7 @@ Session::init();
 
                     </li>
                     <?php } ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.php">Contact</a>
-                    </li>
+
                     <li class="nav-item">
                         <a href="book.php" class="btn btn-primary text-caps btn-rounded btn-framed">Book Training</a>
                     </li>

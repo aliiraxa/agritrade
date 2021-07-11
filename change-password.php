@@ -24,7 +24,12 @@
                 <?php include_once "includes/navbar.php"; ?>
                 <?php include_once "config/login.php"; ?>
                 <?php
-                     $login=new Login();
+
+                if (!Session::get('Login') == true)
+                {
+                    echo '<script>window.location.replace("index.php")</script>';
+                }
+                $login=new Login();
                     if(isset($_POST['change']))
                     {
                         $currentPass=$_POST['current_password'];
@@ -205,9 +210,17 @@
                                 <a class="nav-link icon" href="my-profile.php">
                                     <i class="fa fa-user"></i>My Profile
                                 </a>
+                                <?php
+                                if(!Session::get('role')==1)
+                                {
+                                ?>
+
                                 <a class="nav-link icon" href="my-ads.html">
                                     <i class="fa fa-heart"></i>My Listing
                                 </a>
+                                <?php
+                                }
+                                ?>
                                 <a class="nav-link active icon" href="change-password.php">
                                     <i class="fa fa-recycle"></i>Change Password
                                 </a>

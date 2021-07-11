@@ -24,6 +24,10 @@
                 <?php include_once "includes/navbar.php"; ?>
                 <?php include_once "config/manage.php"; ?>
                 <?php
+                if (!Session::get('Login') == true)
+                {
+                    echo '<script>window.location.replace("index.php")</script>';
+                }
                 $m=new Manage();
                 $id=$_GET['id'];
 

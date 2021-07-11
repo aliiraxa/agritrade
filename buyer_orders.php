@@ -28,16 +28,10 @@
                     $m=new Manage();
                     $record=$m->getProductBySellerId(Session::get('email'));
 
-                            if(!Session::get('role')==1)
+                            if(!Session::get('role')==2)
                             {
                                 echo "<script>location.replace('index.php');</script>";
                             }
-                    if(isset($_GET['id']))
-                    {
-                        $id=$_GET['id'];
-                        $delCheck=$m->deleteProduct($id);
-                        echo "<script>location.replace('seller_all_listing.php');</script>";
-                    }
 
 
                 ?>
@@ -48,11 +42,9 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-6">
-                                <h1>Product Listing</h1>
+                                <h1>Order Listing</h1>
                             </div>
-                            <div class="col-md-6">
-                               <a href="submit.php"><button class="pull-right btn btn-primary text-caps btn-rounded btn-framed">Add product</button></a>
-                            </div>
+
                         </div>
                     </div>
                     <!--end container-->
@@ -76,10 +68,9 @@
                         <tr>
                             <th>ID</th>
                             <th>Title</th>
-                            <th>Pic</th>
-                            <th>Name</th>
+                            <th>Buyer Name</th>
+                            <th>Contact No</th>
                             <th>Email</th>
-                            <th>City</th>
                             <th>Action</th>
                         </tr>
                         </thead>

@@ -22,6 +22,10 @@
                 <?php include_once "includes/navbar.php"; ?>
                 <?php include_once "config/login.php"; ?>
                 <?php
+                if (!Session::get('Login') == true)
+                {
+                    echo '<script>window.location.replace("index.php")</script>';
+                }
                 $login=new Login();
                     if(isset($_POST['profile']))
                     {

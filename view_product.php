@@ -26,6 +26,8 @@
                 <?php
                 $m=new Manage();
                 $id=$_GET['id'];
+                if(!$id)
+                    echo "<script>location.replace('index.php');</script>";
 
                     $pro=$m->getProductById($id);
                     $product=$pro->fetch_assoc();
