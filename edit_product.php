@@ -25,6 +25,13 @@
                 <?php include_once "config/manage.php"; ?>
                 <?php
                 $m=new Manage();
+                $id=$_GET['id'];
+
+                if(!$id)
+                    echo "<script>location.replace('seller_all_listing.php');</script>";
+
+                $pro=$m->getProductById($id);
+                $product=$pro->fetch_assoc();
                 if(isset($_POST['add']))
                 {
                 $oldEmail=Session::get('email');
@@ -39,6 +46,7 @@
                 $district=$_POST['district'];
                 $street=$_POST['street'];
                 $img=$_FILES['img'];
+                $newPic=$_FILES["img"]["name"];
 
 
                     $size=$img['size'];
@@ -52,16 +60,34 @@
 
                     $imageOk=$m->checkImage($target_file,$size);
 
-                    if($imageOk==2)
+                    if($newPic)
                     {
-                        $results =$m->addProduct($title,$price,$name,$email,$phone,$category,$about,$city,$district,$street,$target_file,$oldEmail,$_FILES["img"]["tmp_name"]);
-                        echo "<script>alert('$results')</script>";
-                        echo '<script>window.location.replace("seller_all_listing.php")</script>';
+                        echo "getting pic";
+                        if($imageOk==2)
+                        {
+                            $m->editProduct($title,$price,$name,$email,$phone,$category,$about,$city,$district,$street,$id,$target_file,$_FILES["img"]["tmp_name"]);
+                            echo "<script>alert('Product Updated')</script>";
+                            echo "<script>location.replace('seller_all_listing.php');</script>";
+                            //$results =$m->addProduct($title,$price,$name,$email,$phone,$category,$about,$city,$district,$street,$target_file,$oldEmail,$_FILES["img"]["tmp_name"]);
+                            //   echo "<script>alert('$results')</script>";
+                            // echo '<script>window.location.replace("seller_all_listing.php")</script>';
+                        }else
+                        {
+
+                            echo "<script>alert('Please Check Image Format or Size is Invalid')</script>";
+                        }
+
                     }else
                     {
 
-                        echo "<script>alert('Please Check Image Format or Size is Invalid')</script>";
+                        $m->editProduct($title,$price,$name,$email,$phone,$category,$about,$city,$district,$street,$id);
+                        echo "<script>alert('Product Updated')</script>";
+                        echo "<script>location.replace('seller_all_listing.php');</script>";
+
+
                     }
+
+
 
                 }
 
@@ -72,7 +98,7 @@
                 <!--============ Page Title =========================================================================-->
                 <div class="page-title">
                     <div class="container">
-                        <h1>Add Product</h1>
+                        <h1>Edit Product</h1>
                     </div>
                     <!--end container-->
                 </div>
@@ -99,7 +125,7 @@
                                 <div class="col-md-8">
                                     <div class="form-group">
                                         <label for="title" class="col-form-label required">Title</label>
-                                        <input name="title" type="text" class="form-control" id="title" placeholder="Title" required>
+                                        <input name="title" type="text" class="form-control" id="title" value="<?php echo $product['title'];?>" placeholder="Title" required>
                                     </div>
                                     <!--end form-group-->
                                 </div>
@@ -107,7 +133,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="price" class="col-form-label required">Price</label>
-                                        <input name="price" type="text" class="form-control" id="price" required>
+                                        <input name="price" type="text" class="form-control"  value="<?php echo $product['price'];?>" id="price" required>
                                         <span class="input-group-addon">PKR</span>
                                     </div>
                                     <!--end form-group-->
@@ -117,7 +143,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="name" class="col-form-label required">Your Name</label>
-                                        <input name="name" type="text" class="form-control" id="name" placeholder="Name" required>
+                                        <input name="name" type="text" class="form-control"  value="<?php echo $product['name'];?>" id="name" placeholder="Name" required>
                                     </div>
                                     <!--end form-group-->
                                 </div>
@@ -125,7 +151,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="email" class="col-form-label required">Your Email</label>
-                                        <input name="email" type="email" class="form-control" id="email" placeholder="Email" required>
+                                        <input name="email" type="email" class="form-control"  value="<?php echo $product['email'];?>" id="email" placeholder="Email" required>
                                     </div>
                                     <!--end form-group-->
                                 </div>
@@ -133,7 +159,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="phone" class="col-form-label required">Your Phone</label>
-                                        <input name="phone" type="text" class="form-control" id="phone" placeholder="Phone" required>
+                                        <input name="phone" type="text" class="form-control"  value="<?php echo $product['phone'];?>" id="phone" placeholder="Phone" required>
                                     </div>
                                     <!--end form-group-->
                                 </div>
@@ -148,7 +174,7 @@
                                     <div class="form-group">
                                         <label for="submit-category" class="col-form-label">Category</label>
                                         <select  name="category">
-                                            <option value="">Select Category</option>
+                                            <option value="<?php echo $product['category'];?>"><?php echo $m->getCategoryBYId($product['category']);?> </option>
                                             <?php
                                                 $cat=$m->getAllCategroy();
                                                 while ($cats=$cat->fetch_assoc())
@@ -171,7 +197,7 @@
                             <h2>Details</h2>
                             <div class="form-group">
                                 <label for="details" class="col-form-label">Additional Details</label>
-                                <textarea name="about" id="details" class="form-control" rows="4"></textarea>
+                                <textarea name="about"  id="details" class="form-control" rows="4"><?php echo $product['about'];?></textarea>
                             </div>
                             <!--end form-group-->
                         </section>
@@ -182,14 +208,14 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="city" class="col-form-label required">City</label>
-                                        <input name="city" type="text" class="form-control" id="" placeholder="City">
+                                        <input name="city" value="<?php echo $product['city'];?>" type="text" class="form-control" id="" placeholder="City">
                                     </div>
                                     <!--end form-group-->
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="district" class="col-form-label required">District</label>
-                                        <input name="district" type="text" class="form-control" id="" placeholder="District">
+                                        <input name="district" value="<?php echo $product['district'];?>" type="text" class="form-control" id="" placeholder="District">
                                     </div>
                                     <!--end form-group-->
                                 </div>
@@ -197,7 +223,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="street" class="col-form-label">Street</label>
-                                        <input name="street" type="text" class="form-control" id="street">
+                                        <input name="street" type="text" value=" <?php echo $product['street'];?>" class="form-control" id="street">
                                     </div>
                                     <!--end form-group-->
                                 </div>
@@ -213,7 +239,7 @@
                             <h2>Product Picture</h2>
                             <div class="file-upload-previews"></div>
                             <div class="file-upload">
-                                <input type="file" name="img"   accept="gif|jpg|png" required>
+                                <input type="file" name="img" value=" <?php echo $product['img'];?>"   accept="gif|jpg|png" >
                             </div>
                         </section>
 

@@ -1,12 +1,3 @@
-<?php
-if(isset($_POST['']))
-{
-
-
-}
-
-
-?>
 
 
 <!doctype html>
@@ -32,6 +23,31 @@ if(isset($_POST['']))
         <section class="hero">
             <div class="hero-wrapper">
                 <?php include_once "includes/navbar.php"; ?>
+                <?php include_once "config/login.php"; ?>
+                <?php
+
+                    $login=new Login();
+                    if(isset($_POST['signin']))
+                    {
+
+                        $check=$login->login($_POST['email'],$_POST['password']);
+                        if($check!=false)
+                        {
+
+                            $user=$check->fetch_assoc();
+                            Session::set('Login',true);
+                            Session::set('name',$user['name']);
+                            Session::set('role',$user['role']);
+                            Session::set('email',$user['email']);
+                            echo "<script>location.replace('index.php');</script>";
+
+                        }else
+                        {
+                            echo "<script>alert('Invalid Username & Password')</script>";
+                        }
+                    }
+
+                    ?>
                 <!--============ End Hero Form ======================================================================-->
                 <!--============ Page Title =========================================================================-->
                 <div class="page-title">
@@ -56,7 +72,7 @@ if(isset($_POST['']))
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-md-4">
-                            <form class="form clearfix">
+                            <form class="form clearfix" method="post" action="">
                                 <div class="form-group">
                                     <label for="name" class="col-form-label required">Choose Your Role</label>
                                     <select  class="form-control" name="role" required>
@@ -83,7 +99,7 @@ if(isset($_POST['']))
                                     </label>
 
                                 </div>-->
-                                <center><button type="submit" class="btn btn-primary">Sign In</button></center>
+                                <center><button type="submit" name="signin" class="btn btn-primary">Sign In</button></center>
                             </form>
                             <hr>
                             <!--

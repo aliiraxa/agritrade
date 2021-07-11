@@ -71,7 +71,7 @@ Session::init();
                                 <a href="my-profile.php" class="nav-link">My Profile</a>
                             </li>
                             <li class="nav-item">
-                                <a href="my-ads.html" class="nav-link">My Listing</a>
+                                <a href="seller_all_listing.php" class="nav-link">My Listing</a>
                             </li>
                             <li class="nav-item">
                                 <a href="change-password.php" class="nav-link">Change
@@ -93,7 +93,7 @@ Session::init();
                         <a class="nav-link" href="contact.php">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a href="book-training.html" class="btn btn-primary text-caps btn-rounded btn-framed">Book Training</a>
+                        <a href="book.php" class="btn btn-primary text-caps btn-rounded btn-framed">Book Training</a>
                     </li>
                 </ul>
                 <!--Main navigation list-->

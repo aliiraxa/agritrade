@@ -26,15 +26,14 @@
                 <?php include_once "config/manage.php"; ?>
                 <?php
                     $m=new Manage();
+                    $record=$m->getProductBySellerId(Session::get('email'));
 
-
-
-
-
-
-
-
-
+                    if(isset($_GET['id']))
+                    {
+                        $id=$_GET['id'];
+                        $delCheck=$m->deleteProduct($id);
+                        echo "<script>location.replace('seller_all_listing.php');</script>";
+                    }
 
                 ?>
                 <!--end collapse-->
@@ -47,7 +46,7 @@
                                 <h1>Product Listing</h1>
                             </div>
                             <div class="col-md-6">
-                                <button class="pull-right btn btn-primary text-caps btn-rounded btn-framed">Add product</button>
+                               <a href="submit.php"><button class="pull-right btn btn-primary text-caps btn-rounded btn-framed">Add product</button></a>
                             </div>
                         </div>
                     </div>
@@ -70,19 +69,37 @@
                     <table id="myTable" class="display">
                         <thead>
                         <tr>
-                            <th>Column 1</th>
-                            <th>Column 2</th>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Pic</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>City</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
+                        <?php
+                        if($record)
+                        {
+                        while ($records=$record->fetch_assoc())
+                        {
+
+                        ?>
                         <tr>
-                            <td>Row 1 Data 1</td>
-                            <td>Row 1 Data 2</td>
+                            <td><?php  echo $records['id']; ?></td>
+                            <td><?php  echo $records['title']; ?></td>
+                            <td><img src="<?php  echo $records['img']; ?>" width="150"></td>
+                            <td><?php  echo $records['name']; ?></td>
+                            <td><?php  echo $records['email']; ?></td>
+                            <td><?php  echo $records['city']; ?></td>
+                            <td><a class="btn btn-info" href="edit_product.php?id=<?php  echo $records['id']; ?>">View</a> <a class="btn btn-primary" href="seller_all_listing.php?id=<?php  echo $records['id']; ?>">Delete</a></td>
                         </tr>
-                        <tr>
-                            <td>Row 2 Data 1</td>
-                            <td>Row 2 Data 2</td>
-                        </tr>
+                        <?php
+
+                        }
+                        }
+                        ?>
                         </tbody>
                     </table>
                 </div>

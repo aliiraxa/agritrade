@@ -9,6 +9,11 @@ Class Login
             $this->db=new Database();
     }
 
+    public function login($email,$password)
+    {
+        return $this->db->select("select * from users where email='$email' && password='$password'");
+    }
+
     public function getIdByEmail($email)
     {
          $result=$this->db->select("select id from users where email='$email'");

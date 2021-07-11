@@ -50,6 +50,47 @@ Class Manage
     {
         return $this->db->select("select * from categories");
     }
+    public function getIdByEmail($email)
+    {
+        $result=$this->db->select("select id from users where email='$email'");
+        $result=$result->fetch_assoc();
+        return $result['id'];
+    }
+    function getProductBySellerId($email)
+    {
+        $Id=$this->getIdByEmail($email);
+        return $this->db->select("select * from product where user_id='$Id'");
+    }
+
+    function deleteProduct($id)
+    {
+        $this->db->delete("delete from product where id='$id'");
+    }
+
+    function getCategoryBYId($id)
+    {
+        $get=$this->db->select("select name from categories where id='$id'");
+        $cat=$get->fetch_assoc();
+        return $cat['name'];
+
+    }
+    function getProductById($id)
+    {
+        return $this->db->select("select * from product where id='$id'");
+    }
+
+    function editProduct($title,$price,$name,$email,$phone,$category,$about,$city,$district,$street,$id,$img=0,$temp=0)
+    {
+        if(!$img)
+        $this->db->update("update product set title='$title',price='$price',name='$name',email='$email',phone='$phone',category='$category',about='$about',city='$city',district='$district',street='$street'  where id='$id'");
+        else
+        {
+
+            $this->db->update("update product set title='$title',price='$price',name='$name',email='$email',phone='$phone',category='$category',about='$about',city='$city',district='$district',street='$street',img='$img'   where id='$id'");
+            move_uploaded_file($temp,$img);
+        }
+
+    }
 
 
 
