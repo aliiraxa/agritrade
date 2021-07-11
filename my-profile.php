@@ -30,6 +30,8 @@
                         $title=$_POST['title'];
                         $name=$_POST['name'];
                         $img=$_FILES['user_image'];
+                        $newPic=$_FILES["user_image"]["name"];
+                        $temps=$_FILES["user_image"]["tmp_name"];
                         $address=$_POST['location'];
                         $about=$_POST['about'];
                         $phone=$_POST['phone'];
@@ -41,17 +43,15 @@
                         $target_dir = "assets/img/";
                         $target_file = $target_dir . $newfilename;
 
-
-
-                        $imageOk=$login->checkImage($target_file,'user_image');
-
-                        $login->updateProfile($title,$name,$target_file,$address,$about,$phone,$email,$id);
-
-
-
-//                        move_uploaded_file($_FILES["file"]["tmp_name"], "../img/imageDirectory/" . $newfilename);
-
-
+                        $imageOk=$login->checkImage($target_file,$img);
+                        if($imageOk==2)
+                        {
+                            $results = $login->updateProfile($title, $name, $target_file, $address, $about, $phone, $email, $id,$newPic,$temps);
+                            echo "<script>alert('$results')</script>";
+                        }else
+                        {
+                            echo "<script>alert('$imageOk')</script>";
+                        }
 
                     }
 

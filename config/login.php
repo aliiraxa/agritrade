@@ -40,19 +40,43 @@ Class Login
         return $this->db->update("UPDATE users set password='$password' where email='$email'");
     }
 
-    function updateProfile($title,$name,$img,$address,$about,$phone,$email,$id)
+    function updateProfile($title,$name,$img,$address,$about,$phone,$email,$id,$newPic,$temps)
     {
         $oldEmail=Session::get('email');
         $oldImg=Session::get('img');
 
-        $getEmail=$this->db->select("select * from users where email = '$email'");
-        $getsEmail=$getEmail->fetch_assoc();
+
         if($oldEmail==$email)
         {
+            if($newPic)
+            {
+                $this->db->update("UPDATE users set title='$title',name='$name',img='$img',address='$address',about='$about',phone='$phone',email='$email' where id='$id'");
+                move_uploaded_file($temps, $img);
+            }else
+            {
             $this->db->update("UPDATE users set title='$title',name='$name',address='$address',about='$about',phone='$phone',email='$email' where id='$id'");
+            }
+
             return "Update profile Successfully";
-        }else
-        {
+        }else {
+            $getEmail = $this->db->select("select * from users where email = '$email'");
+            if ($getEmail != false)
+            {
+                return "Email Already Exist";
+            }else
+            {
+                if($newPic)
+                {
+                    $this->db->update("UPDATE users set title='$title',name='$name',img='$img',address='$address',about='$about',phone='$phone',email='$email' where id='$id'");
+                    move_uploaded_file($temps, $img);
+                }else
+                {
+                    $this->db->update("UPDATE users set title='$title',name='$name',address='$address',about='$about',phone='$phone',email='$email' where id='$id'");
+                }
+
+                Session::set('email',$email);
+              return "Update profile Successfully";
+            }
 
         }
 
@@ -74,13 +98,14 @@ Class Login
     {
         return $this->db->select("select * from users where email='$email'");
     }
-    function checkImage($target_file,$name)
+    function checkImage($target_file,$img)
     {
+
         $message="";
         $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
         // Check file size
 
-        if ($_FILES[$name]["size"] > 2000000) {
+        if ($img["size"] > 2000000) {
             $message.= "1. Sorry, your file is too large.<br>";
         }
         // Allow certain file formats
