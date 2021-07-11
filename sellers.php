@@ -20,6 +20,7 @@
         <section class="hero">
             <div class="hero-wrapper">
                 <?php include_once "includes/navbar.php"; ?>
+                <?php include_once "config/manage.php"; ?>
                 <!--============ Hero Form ==========================================================================-->
                 <div class="collapse" id="collapseMainSearchForm">
                     <form class="hero-form form">
@@ -54,58 +55,75 @@
         <section class="content">
             <section class="block">
                 <div class="container">
-                    <?php
-                    
-                    ?>
+
                     <div class="authors masonry items grid-xl-4-items grid-lg-4-items grid-md-4-items">
-                        <div class="item author">
-                            <div class="wrapper">
-                                <div class="image">
-                                    <h3>
-                                        <a href="seller-detail-1.html" class="title">Jane Great</a>
-                                    </h3>
-                                    <a href="single-listing-1.html" class="image-wrapper background-image">
-                                        <img src="assets/img/author-02.jpg" alt="">
-                                    </a>
-                                </div>
-                                <!--end image-->
-                                <h4 class="location">
-                                    <a href="#">Nashville, TN</a>
-                                </h4>
-                                <div class="meta">
-                                    <figure>
-                                        <div class="rating" data-rating="4"></div>
-                                    </figure>
-                                    <figure>
-                                        <a href="#">
-                                            <i class="fa fa-user"></i><strong>36</strong> Listings
-                                        </a>
-                                    </figure>
-                                </div>
-                                <!--end meta-->
-                                <div class="description">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam venenatis lobortis</p>
-                                </div>
-                                <!--end description-->
-                                <div class="additional-info">
-                                    <ul>
-                                        <li>
-                                            <figure>Email</figure>
-                                            <aside>jane.great@example.com</aside>
-                                        </li>
-                                        <li>
-                                            <figure>Phone</figure>
-                                            <aside>+1 123 456 789</aside>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <!--end addition-info-->
-                                <a href="single-listing-1.html" class="detail text-caps underline">Detail</a>
-                            </div>
-                        </div>
-                        <!--end item-->
+                        <?php
+                        $m=new Manage();
+                        $getRecord=$m->getSellers();
+                        if($getRecord)
+                        {
+                            while ($seller=$getRecord->fetch_assoc())
+                            {
+                                ?>
+                                <div class="item author">
+                                    <div class="wrapper">
+                                        <div class="image">
+                                            <h3>
+                                                <a  class="title"><?php echo $seller['name']; ?></a>
+                                            </h3>
+                                            <a href="single-listing-1.html" class="image-wrapper background-image">
+                                                <?php
+                                                    if(!$seller['img'])
+                                                    {
+                                                ?>
 
+                                                <img src="assets/img/author-02.jpg" alt="">
 
+                                                <?php
+
+                                                    }else
+                                                        {
+                                                ?>
+
+                                                <img src="<?php echo $seller['img']; ?>" alt="">
+
+                                                <?php
+                                                        }
+                                                ?>
+                                            </a>
+                                        </div>
+                                        <!--end image-->
+                                        <h4 class="location">
+                                            <a href="#"><?php echo $seller['address']; ?></a>
+                                        </h4>
+
+                                        <!--end meta-->
+                                        <div class="description">
+                                            <p><?php echo $seller['about']; ?></p>
+                                        </div>
+                                        <!--end description-->
+                                        <div class="additional-info">
+                                            <ul>
+                                                <li>
+                                                    <figure>Email</figure>
+                                                    <aside><?php echo $seller['email']; ?></aside>
+                                                </li>
+                                                <li>
+                                                    <figure>Phone</figure>
+                                                    <aside><?php echo $seller['phone']; ?></aside>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!--end item-->
+
+                                <?php
+
+                                }
+                                }
+                        ?>
 
                     </div>
 

@@ -51,10 +51,10 @@ Session::init();
                 <!--Main navigation list-->
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
+                        <a class="nav-link" href="index.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Sellers</a>
+                        <a class="nav-link" href="sellers.php">Sellers</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Stores</a>

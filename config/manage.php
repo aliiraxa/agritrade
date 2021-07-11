@@ -92,6 +92,11 @@ Class Manage
 
     }
 
+    function getSellers()
+    {
+        return $this->db->select("select * from users where role=1");
+    }
+
 
 
 
