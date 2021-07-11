@@ -1,3 +1,14 @@
+<?php
+if(isset($_POST['']))
+{
+
+
+}
+
+
+?>
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -48,7 +59,7 @@
                             <form class="form clearfix">
                                 <div class="form-group">
                                     <label for="name" class="col-form-label required">Choose Your Role</label>
-                                    <select  class="form-control" required>
+                                    <select  class="form-control" name="role" required>
                                         <option value="">Choose</option>
                                         <option value="1">Seller</option>
                                         <option value="2">Buyer</option>

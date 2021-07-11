@@ -20,6 +20,42 @@
         <header class="hero">
             <div class="hero-wrapper">
                 <?php include_once "includes/navbar.php"; ?>
+                <?php include_once "config/login.php"; ?>
+                <?php
+                $login=new Login();
+                    if(isset($_POST['profile']))
+                    {
+
+                        $id=$login->getIdByEmail(Session::get('email'));
+                        $title=$_POST['title'];
+                        $name=$_POST['name'];
+                        $img=$_FILES['user_image'];
+                        $address=$_POST['location'];
+                        $about=$_POST['about'];
+                        $phone=$_POST['phone'];
+                        $email=$_POST['email'];
+
+                        //image work here
+                        $temp = explode(".", $_FILES["user_image"]["name"]);
+                        $newfilename = $id . '.' . end($temp);
+                        $target_dir = "assets/img/";
+                        $target_file = $target_dir . $newfilename;
+
+
+
+                        $imageOk=$login->checkImage($target_file,'user_image');
+
+                        $login->updateProfile($title,$name,$target_file,$address,$about,$phone,$email,$id);
+
+
+
+//                        move_uploaded_file($_FILES["file"]["tmp_name"], "../img/imageDirectory/" . $newfilename);
+
+
+
+                    }
+
+                ?>
                 <!--============ Hero Form ==========================================================================-->
                 <div class="collapse" id="collapseMainSearchForm">
                     <form class="hero-form form">
@@ -173,14 +209,19 @@
                                 <a class="nav-link icon" href="my-ads.html">
                                     <i class="fa fa-heart"></i>My Listing
                                 </a>
-                                <a class="nav-link icon" href="change-password.html">
+                                <a class="nav-link icon" href="change-password.php">
                                     <i class="fa fa-recycle"></i>Change Password
                                 </a>
                             </nav>
                         </div>
                         <!--end col-md-3-->
+                        <?php
+                            $results=$login->getCurrentUser(Session::get('email'));
+                            $userData=$results->fetch_assoc();
+
+                        ?>
                         <div class="col-md-9">
-                            <form class="form">
+                            <form class="form" method="post" action="" enctype="multipart/form-data">
                                 <div class="row">
                                     <div class="col-md-8">
                                         <h2>Personal Information</h2>
@@ -190,8 +231,15 @@
                                                     <div class="form-group">
                                                         <label for="title" class="col-form-label">Title</label>
                                                         <select name="title" id="title" data-placeholder="Title">
+                                                            <?php
+                                                            if(!$userData['title'])
+                                                            {
+                                                            ?>
                                                             <option value="">Title</option>
-                                                            <option value="1" selected>Mrs</option>
+                                                            <?php } ?>
+                                                            <option><?php  echo $userData['title']; ?></option>
+                                                            <option value="">-------------</option>
+                                                            <option value="1">Mrs</option>
                                                             <option value="2">Mr</option>
                                                         </select>
                                                     </div>
@@ -200,7 +248,7 @@
                                                 <div class="col-md-8">
                                                     <div class="form-group">
                                                         <label for="name" class="col-form-label required">Your Name</label>
-                                                        <input name="name" type="text" class="form-control" id="name" placeholder="Your Name" value="Jane Doe" required>
+                                                        <input name="name" type="text" class="form-control" id="name" placeholder="Your Name" value="<?php  echo $userData['name']; ?>" required>
                                                     </div>
                                                     <!--end form-group-->
                                                 </div>
@@ -209,12 +257,12 @@
                                             <!--end row-->
                                             <div class="form-group">
                                                 <label for="location" class="col-form-label required">Your Location</label>
-                                                <input name="location" type="text" class="form-control" id="input-location2" placeholder="Your Location" value="Manhattan, NY" required>
+                                                <input name="location" type="text" class="form-control" id="input-location2" placeholder="Your Location" value="<?php  echo $userData['address']; ?>" required>
                                             </div>
                                             <!--end form-group-->
                                             <div class="form-group">
                                                 <label for="about" class="col-form-label">More About You</label>
-                                                <textarea name="about" id="about" class="form-control" rows="4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut nec tincidunt arcu, sit amet fermentum sem. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</textarea>
+                                                <textarea name="about" id="about" class="form-control" rows="4"><?php  echo $userData['about']; ?></textarea>
                                             </div>
                                             <!--end form-group-->
                                         </section>
@@ -223,39 +271,44 @@
                                             <h2>Contact</h2>
                                             <div class="form-group">
                                                 <label for="phone" class="col-form-label">Phone</label>
-                                                <input name="phone" type="text" class="form-control" id="phone" placeholder="Your Phone" value="312-238-3329">
+                                                <input name="phone" type="text" class="form-control" id="phone" min="11" placeholder="Your Phone" value="<?php  echo $userData['phone']; ?>">
                                             </div>
                                             <!--end form-group-->
                                             <div class="form-group">
                                                 <label for="email" class="col-form-label">Email</label>
-                                                <input name="email" type="email" class="form-control" id="email" placeholder="Your Email" value="jane.doe@example.com">
+                                                <input name="email" type="email" class="form-control" id="email" placeholder="Your Email" value="<?php  echo $userData['email']; ?>">
                                             </div>
                                             <!--end form-group-->
                                         </section>
 
-                                        <section>
-                                            <h2>Social</h2>
-                                            <div class="form-group">
-                                                <label for="twitter" class="col-form-label">Twitter</label>
-                                                <input name="twitter" type="text" class="form-control" id="twitter" placeholder="http://" value="http://www.twitter.com/jane.doe">
-                                            </div>
-                                            <!--end form-group-->
-                                            <div class="form-group">
-                                                <label for="facebook" class="col-form-label">Facebook</label>
-                                                <input name="facebook" type="text" class="form-control" id="facebook" placeholder="http://" value="http://www.facebook.com/jane.doe">
-                                            </div>
-                                            <!--end form-group-->
-                                        </section>
+                                      
 
                                         <section class="clearfix">
-                                            <button type="submit" class="btn btn-primary float-right">Save Changes</button>
+                                            <button type="submit" name="profile" class="btn btn-primary float-right">Save Changes</button>
                                         </section>
+                                        <b style="color: red;">Note: Account Only Admin Can delete. You Can Contact to Admin For Account Deletion</b>
                                     </div>
                                     <!--end col-md-8-->
                                     <div class="col-md-4">
                                         <div class="profile-image">
                                             <div class="image background-image">
+                                                <?php
+                                                    if(!$userData['img'])
+                                                    {
+
+
+                                                ?>
                                                 <img src="assets/img/author-09.jpg" alt="">
+                                                <?php
+                                                    }else
+                                                    {
+
+                                                ?>
+                                                        <img src="<?php echo $userData['img']; ?>" alt="">
+                                                 <?php
+
+                                                    }
+                                                 ?>
                                             </div>
                                             <div class="single-file-input">
                                                 <input type="file" id="user_image" name="user_image">

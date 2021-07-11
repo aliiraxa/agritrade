@@ -1,6 +1,7 @@
 <?php
 include_once "config\session.php";
 include_once "config\database.php";
+Session::init();
 
 ?>
 
@@ -9,6 +10,10 @@ include_once "config\database.php";
     <div class="container">
         <!--end left-->
         <ul class="right">
+            <?php
+            if(Session::get('Login')!=true)
+            {
+            ?>
             <li>
                 <a href="sign-in.php">
                     <i class="fa fa-sign-in"></i>Sign In
@@ -19,6 +24,13 @@ include_once "config\database.php";
                     <i class="fa fa-pencil-square-o"></i>Register
                 </a>
             </li>
+            <?php }else {?>
+            <li>
+                <a>
+                    <?php  echo "Welcome, " .Session::get('name');  ?>
+                </a>
+            </li>
+            <?php } ?>
         </ul>
         <!--end right-->
     </div>
@@ -48,7 +60,10 @@ include_once "config\database.php";
                         <a class="nav-link" href="#">Stores</a>
                     </li>
 
-
+                    <?php
+                    if(Session::get('Login')==true)
+                    {
+                    ?>
                     <li class="nav-item has-child">
                         <a class="nav-link" href="#">User Panel</a>
                         <ul class="child">
@@ -62,9 +77,18 @@ include_once "config\database.php";
                                 <a href="change-password.php" class="nav-link">Change
                                     Password</a>
                             </li>
+                            <?php
+                            if (isset($_GET['action']) && $_GET['action']=="logout") {
+                                session::destroy();
+                            }
+                            ?>
+                            <li class="nav-item">
+                                <a href="?action=logout" class="nav-link">Log Out</a>
+                            </li>
                         </ul>
 
                     </li>
+                    <?php } ?>
                     <li class="nav-item">
                         <a class="nav-link" href="contact.php">Contact</a>
                     </li>

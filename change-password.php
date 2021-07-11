@@ -22,9 +22,42 @@
         <header class="hero">
             <div class="hero-wrapper">
                 <?php include_once "includes/navbar.php"; ?>
+                <?php include_once "config/login.php"; ?>
+                <?php
+                     $login=new Login();
+                    if(isset($_POST['change']))
+                    {
+                        $currentPass=$_POST['current_password'];
+                        $currentCurrent=$_POST['new_current_password'];
+                        $currentNewPass=$_POST['repeat_new_current_password'];
+                        if($currentCurrent!=$currentNewPass)
+                        {
+                            echo "<script>alert('New Confirm both Password Not Match');</script>";
+                        }else
+                        {
+                            if($login->passwordCorrect($currentPass, Session::get('email'))!=true)
+                            {
+                                echo "<script>alert('Current Pass Not valid');</script>";
+                                echo '<script>window.location.replace("change-password.php")</script>';
+                                return;
+                            }
+
+                            $result=$login->changePassword($currentCurrent,Session::get('email'));
+                            if($result)
+                            {
+                                echo "<script>alert('Password Successfully Changed');</script>";
+                            }else
+                            {
+                                echo "<script>alert('Server Error');</script>";
+                            }
+                        }
+                    }
+
+                ?>
+
                 <!--============ Hero Form ==========================================================================-->
                 <div class="collapse" id="collapseMainSearchForm">
-                    <form class="hero-form form">
+                    <form class="hero-form form" >
                         <div class="container">
                             <!--Main Form-->
                             <div class="main-search-form">
@@ -169,7 +202,7 @@
                     <div class="row">
                         <div class="col-md-3">
                             <nav class="nav flex-column side-nav">
-                                <a class="nav-link icon" href="my-profile.html">
+                                <a class="nav-link icon" href="my-profile.php">
                                     <i class="fa fa-user"></i>My Profile
                                 </a>
                                 <a class="nav-link icon" href="my-ads.html">
@@ -182,7 +215,7 @@
                         </div>
                         <!--end col-md-3-->
                         <div class="col-md-9">
-                            <form class="form">
+                            <form class="form" method="POST" action="change-password.php">
                                 <div class="row justify-content-center">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -191,16 +224,16 @@
                                         </div>
                                         <!--end form-group-->
                                         <div class="form-group">
-                                            <label for="new_current_password" class="col-form-label required">New Password</label>
-                                            <input name="new_current_password" type="password" class="form-control" id="new_current_password" placeholder="New Password" required>
+                                            <label for="new_current_password"  class="col-form-label required">New Password</label>
+                                            <input name="new_current_password" min="6" type="password" class="form-control" id="new_current_password" placeholder="New Password" required>
                                         </div>
                                         <!--end form-group-->
                                         <div class="form-group">
                                             <label for="repeat_new_current_password" class="col-form-label required">Repeat Password</label>
-                                            <input name="repeat_new_current_password" type="password" class="form-control" id="repeat_new_current_password" placeholder="Repeat New Password" required>
+                                            <input name="repeat_new_current_password" min="6" type="password" class="form-control" id="repeat_new_current_password" placeholder="Repeat New Password" required>
                                         </div>
                                         <!--end form-group-->
-                                        <button type="submit" class="btn btn-primary float-right">Change Password</button>
+                                        <button type="submit" name="change" class="btn btn-primary float-right">Change Password</button>
                                     </div>
                                     <!--end col-md-6-->
                                 </div>

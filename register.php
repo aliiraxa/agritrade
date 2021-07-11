@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -23,6 +24,48 @@
         <header class="hero">
             <div class="hero-wrapper">
                 <?php include_once "includes/navbar.php"; ?>
+                <?php include_once "config/login.php"; ?>
+                <?php
+
+                    $login=new Login();
+                if(isset($_POST['register']))
+                {
+                    $role=$_POST['role'];
+                    $name=$_POST['name'];
+                    $email=$_POST['email'];
+                    $password=$_POST['password'];
+                    $repeat_password=$_POST['repeat_password'];
+
+                    if($password!=$repeat_password)
+                    {
+                        echo "<script>alert('Confirm Password Not Same');</script>";
+                    }else
+                    {
+                        $check=$login->checkEmailExits($email);
+                        if($check)
+                        {
+                            echo "<script>alert('User Already Exist');</script>";
+                            echo '<script>window.location.replace("register.php")</script>';
+                            return;
+                        }
+                        $result=$login->createAccount($role,$name,$email,$password);
+
+                        if($result!=false)
+                        {
+                            Session::set('Login',true);
+                            Session::set('name',$name);
+                            Session::set('email',$email);
+                            echo '<script>window.location.replace("index.php")</script>';
+                        }else
+                        {
+                            echo '<script>window.location.replace("register.php")</script>';
+                        }
+
+                    }
+                }
+
+
+                ?>
                 <!--============ End Hero Form ======================================================================-->
                 <!--============ Page Title =========================================================================-->
                 <div class="page-title">
@@ -47,10 +90,10 @@
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8">
-                            <form class="form clearfix">
+                            <form class="form clearfix" method="POST" action="register.php">
                                 <div class="form-group">
                                     <label for="name" class="col-form-label required">Choose Your Role</label>
-                                    <select  class="form-control" required>
+                                    <select  class="form-control" name="role" required>
                                         <option value="">Choose</option>
                                         <option value="1">Seller</option>
                                         <option value="2">Buyer</option>
@@ -79,7 +122,7 @@
                                 <!--end form-group-->
 
 
-                                   <center><button type="submit" class="btn btn-primary">Register</button></center>
+                                   <center><button type="submit" name="register" class="btn btn-primary">Register</button></center>
 
                             </form>
                             <hr>
