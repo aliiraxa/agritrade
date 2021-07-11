@@ -28,7 +28,14 @@
                 <!--============ Page Title =========================================================================-->
                 <div class="page-title">
                     <div class="container">
-                        <h1>Product Listing</h1>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h1>Product Listing</h1>
+                            </div>
+                            <div class="col-md-6">
+                                <button class="pull-right btn btn-primary text-caps btn-rounded btn-framed">Add product</button>
+                            </div>
+                        </div>
                     </div>
                     <!--end container-->
                 </div>
