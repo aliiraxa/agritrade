@@ -81,17 +81,6 @@ Class Login
         }
 
 
-//        $result=$this->db->select("select * from users where email <> '$email'");
-//        $result=$result->fetch_assoc();
-//        echo $result['email'];
-//        echo $email;
-//        if($result['email']!=$email) {
-//         //   $this->db->update("UPDATE users set title='$title',name='$name',img='$img',address='$address',about='$about',phone='$phone',email='$email' where id='$id'");
-//          //  Session::set('email',$email);
-//        }else
-//        {
-//            return "Email Already Exits";
-//        }
     }
 
     function getCurrentUser($email)

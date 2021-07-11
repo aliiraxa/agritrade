@@ -38,9 +38,30 @@
                 $city=$_POST['city'];
                 $district=$_POST['district'];
                 $street=$_POST['street'];
-                $img=$_POST['img'];
+                $img=$_FILES['img'];
 
-                $m->addProduct($title,$price,$name,$email,$phone,$category,$about,$city,$district,$street,$img,$oldEmail);
+
+                    $size=$img['size'];
+
+
+                    //image work here
+                    $temp = explode(".", $_FILES["img"]["name"]);
+                    $newfilename = $title . '.' . end($temp);
+                    $target_dir = "assets/img/products/";
+                    $target_file = $target_dir . $newfilename;
+
+                    $imageOk=$m->checkImage($target_file,$size);
+
+                    if($imageOk==2)
+                    {
+                        $results =$m->addProduct($title,$price,$name,$email,$phone,$category,$about,$city,$district,$street,$target_file,$oldEmail,$_FILES["img"]["tmp_name"]);
+                        echo "<script>alert('$results')</script>";
+                    }else
+                    {
+
+                        echo "<script>alert('Please Check Image Format or Size is Invalid')</script>";
+                    }
+
                 }
 
 
@@ -69,7 +90,7 @@
             <section class="block">
                 <div class="container">
 
-                    <form class="form form-submit" method="post" action="">
+                    <form class="form form-submit" method="post" action="" enctype="multipart/form-data">
                         <section>
                             <h2>Basic Information</h2>
 
@@ -191,7 +212,7 @@
                             <h2>Product Picture</h2>
                             <div class="file-upload-previews"></div>
                             <div class="file-upload">
-                                <input type="file" name="files"   accept="gif|jpg|png" required>
+                                <input type="file" name="img"   accept="gif|jpg|png" required>
                             </div>
                         </section>
 
