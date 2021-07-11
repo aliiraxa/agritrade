@@ -23,6 +23,32 @@
         <header class="hero">
             <div class="hero-wrapper">
                 <?php include_once "includes/navbar.php"; ?>
+                <?php include_once "config/manage.php"; ?>
+                <?php
+                    $m=new Manage();
+                    if(isset($_POST['add']))
+
+
+
+                    $title=$_POST['title'];
+                    $price=$_POST['price'];
+                    $name=$_POST['name'];
+                    $email=$_POST['email'];
+                    $phone=$_POST['phone'];
+                    $category=$_POST['category'];
+                    $about=$_POST['about'];
+                    $city=$_POST['city'];
+                    $district=$_POST['district'];
+                    $street=$_POST['street'];
+                    $img=$_POST['img'];
+
+               $m->addProduct($title,$price,$name,$email,$phone,$category,$about,$city,$district,$street,$img,$oldEmail);
+
+
+
+
+
+                ?>
                 <!--end collapse-->
                 <!--============ End Hero Form ======================================================================-->
                 <!--============ Page Title =========================================================================-->

@@ -22,6 +22,31 @@
         <header class="hero">
             <div class="hero-wrapper">
                 <?php include_once "includes/navbar.php"; ?>
+                <?php include_once "config/manage.php"; ?>
+                <?php
+                $m=new Manage();
+                if(isset($_POST['add']))
+                {
+                $oldEmail=Session::get('email');
+                $title=$_POST['title'];
+                $price=$_POST['price'];
+                $name=$_POST['name'];
+                $email=$_POST['email'];
+                $phone=$_POST['phone'];
+                $category=$_POST['category'];
+                $about=$_POST['about'];
+                $city=$_POST['city'];
+                $district=$_POST['district'];
+                $street=$_POST['street'];
+                $img=$_POST['img'];
+
+                $m->addProduct($title,$price,$name,$email,$phone,$category,$about,$city,$district,$street,$img,$oldEmail);
+                }
+
+
+
+
+                ?>
                 <!--============ Page Title =========================================================================-->
                 <div class="page-title">
                     <div class="container">
@@ -44,7 +69,7 @@
             <section class="block">
                 <div class="container">
 
-                    <form class="form form-submit">
+                    <form class="form form-submit" method="post" action="">
                         <section>
                             <h2>Basic Information</h2>
 
@@ -100,10 +125,17 @@
                                     <h2>Category</h2>
                                     <div class="form-group">
                                         <label for="submit-category" class="col-form-label">Category</label>
-                                        <select class="change-tab" name="submit_category"  data-placeholder="Select Category">
+                                        <select  name="category">
                                             <option value="">Select Category</option>
-
-                                            <option value="furniture">Furniture</option>
+                                            <?php
+                                                $cat=$m->getAllCategroy();
+                                                while ($cats=$cat->fetch_assoc())
+                                                {
+                                            ?>
+                                            <option value="<?php echo $cats['id']; ?>"><?php echo $cats['name']; ?></option>
+                                            <?php
+                                                }
+                                            ?>
                                         </select>
                                     </div>
                                     <!--end form-group-->
@@ -117,7 +149,7 @@
                             <h2>Details</h2>
                             <div class="form-group">
                                 <label for="details" class="col-form-label">Additional Details</label>
-                                <textarea name="details" id="details" class="form-control" rows="4"></textarea>
+                                <textarea name="about" id="details" class="form-control" rows="4"></textarea>
                             </div>
                             <!--end form-group-->
                         </section>
@@ -128,27 +160,14 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="city" class="col-form-label required">City</label>
-                                        <select name="city" id="city" data-placeholder="Select City" required>
-                                            <option value="">City</option>
-                                            <option value="1">London</option>
-                                            <option value="2">New York</option>
-                                            <option value="3">Paris</option>
-                                            <option value="4">Moscow</option>
-                                        </select>
+                                        <input name="city" type="text" class="form-control" id="" placeholder="City">
                                     </div>
                                     <!--end form-group-->
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="district" class="col-form-label required">District</label>
-                                        <select name="district" id="district" data-placeholder="Select District" required>
-                                            <option value="">District</option>
-                                            <option value="1">Manhattan</option>
-                                            <option value="2">Brooklyn</option>
-                                            <option value="3">Queens</option>
-                                            <option value="4">The Bronx</option>
-                                            <option value="5">Staten Island</option>
-                                        </select>
+                                        <input name="district" type="text" class="form-control" id="" placeholder="District">
                                     </div>
                                     <!--end form-group-->
                                 </div>
@@ -172,7 +191,7 @@
                             <h2>Product Picture</h2>
                             <div class="file-upload-previews"></div>
                             <div class="file-upload">
-                                <input type="file" name="files"   accept="gif|jpg|png">
+                                <input type="file" name="files"   accept="gif|jpg|png" required>
                             </div>
                         </section>
 
@@ -180,7 +199,7 @@
 
                         <section class="clearfix">
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary large icon float-right">Save Product<i class="fa fa-chevron-right"></i></button>
+                                <button type="submit" name="add" class="btn btn-primary large icon float-right">Save Product<i class="fa fa-chevron-right"></i></button>
                             </div>
                         </section>
                     </form>
