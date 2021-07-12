@@ -5,7 +5,7 @@ if (isset($_GET['delUser'])) {
     $user=new ManageAdmin();
     $id=$_GET['delUser'];
     $delCheck=$user->deleteUser($id);
-    echo "<script>location.replace('buyers.php');</script>";
+    echo "<script>location.replace('listers.php');</script>";
 }
 ?>
         <div id="page-wrapper">
@@ -53,7 +53,7 @@ if (isset($_GET['delUser'])) {
                                 <tbody>
                                 <?php
                                 $user=new ManageAdmin();
-                                     $getAll=$user->getBuyer();
+                                     $getAll=$user->getStoreListers();
 
                                      if ($getAll) {
                                     while ($result=$getAll->fetch_assoc()) {

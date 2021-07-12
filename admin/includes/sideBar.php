@@ -22,71 +22,49 @@ ob_start();
                 <a href="#"><i class="fa fa-user fa-fw"></i> User<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="viewUser.php">View Sellers</a>
+                        <a href="sellers.php">View Sellers</a>
                         <a href="buyers.php">View Buyer</a>
-                        <a href="viewUser.php">View Agents</a>
-                        <a href="viewUser.php">Store Lister's</a>
+                        <a href="agent.php">View Agents</a>
+                        <a href="listers.php">Store Lister's</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
 
             <li>
-                <a href="#"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Route<span class="fa arrow"></span></a>
+                <a href="#"><span class="glyphicon glyphicon-stop" aria-hidden="true"></span> Stores list<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="addRoute.php">Add Route</a>
-                    </li>
-                    <li>
-                        <a href="viewRoute.php">View Route</a>
+                        <a href="stores.php">View Stores</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
 
             <li>
-                <a href="#"><span class="glyphicon glyphicon-road" aria-hidden="true"></span> Driver<span class="fa arrow"></span></a>
+                <a href="#"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Products<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="addDriver.php">Add Driver</a>
-                    </li>
-                    <li>
-                        <a href="viewDriver.php">View Driver</a>
+                        <a href="product.php">Products</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
 
             <li>
-                <a href="#"><i class="fa fa-bus" aria-hidden="true"></i> Buses<span class="fa arrow"></span></a>
+                <a href="#"><i class="glyphicon glyphicon-sort-by-order-alt" aria-hidden="true"></i> Orders<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="addBus.php">Add Bus</a>
-                    </li>
-                    <li>
-                        <a href="viewBus.php">View Bus Reocord</a>
+                        <a href="viewBus.php">View Orders</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
 
+
+
             <li>
-                <a href="#"><span class="glyphicon glyphicon-camera" aria-hidden="true"></span> Entry<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <li>
-                        <a href="addEntry.php">Add Entry</a>
-                    </li>
-                    <li>
-                        <a href="viewEntry.php">View Entry</a>
-                    </li>
-                </ul>
-                <!-- /.nav-second-level -->
-            </li>
-            <li>
-                <a href="search.php"><i class="fa fa-search"></i> Search Entry</a>
-            </li>
-            <li>
-                <a href="entryReport.php"><i class="fa fa-bar-chart fa-fw"></i> Entry Report</a>
+                <a href="entryReport.php"><i class="fa fa-bar-chart fa-fw"></i> Billing Report</a>
             </li>
         </ul>
     </div>

@@ -3,7 +3,7 @@
 <?php include('classes/Driver.php') ?>
 <?php
 if (!isset($_GET['editDriver']) || $_GET['editDriver']==NULL) {
-    echo "<script>window.location='viewDriver.php'</script>";
+    echo "<script>window.location='product.php'</script>";
 }else
 {
     $id=$_GET['editDriver'];
@@ -64,7 +64,7 @@ if (!isset($_GET['editDriver']) || $_GET['editDriver']==NULL) {
                                             <input class="form-control" name="cnicNo" title="Please Write In CNIC Format"  required autocomplete="off" value="<?php echo $result['driver_cnic']; ?>" type="text" pattern="[0-9]{5}[-][0-9]{7}[-][0-9]{1}"  placeholder="Enter Driver CNIC No" />
                                         </div>
                                         <button type="submit" name="updateDriver" class="btn btn-primary"><i class="fa fa-sign-out fa-fw"></i> Save</button>
-                                        <a href="viewDriver.php" class="btn btn-danger"><i class="fa fa-remove" aria-hidden="true"></i> Cancel</a>
+                                        <a href="product.php" class="btn btn-danger"><i class="fa fa-remove" aria-hidden="true"></i> Cancel</a>
 
                             </form>
                                     <?php }?>

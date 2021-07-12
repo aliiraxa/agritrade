@@ -83,6 +83,7 @@
                                         <option value="1">Seller</option>
                                         <option value="2">Buyer</option>
                                         <option value="3">Transport Agent</option>
+                                        <option value="4">Store Lister's</option>
                                     </select>
                                 </div>
                                 <div class="form-group">

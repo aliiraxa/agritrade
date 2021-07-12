@@ -88,17 +88,21 @@
                                 <p>
                                     <?php echo $product['about']; ?>
                                 </p>
+                                <h2>Stock Available: <?php echo $product['stock']." KG"; ?></h2>
+
                                 <br><br>
                                 <?php
                                 $role=Session::get('role');
                                 if($role==2)
                                 {
+                                    if($m->getQTY($product['id'])!=0)
+                                    {
 
 
                                 ?>
-                                <a href="order.php" class="btn btn-primary text-caps btn-rounded btn-framed">Order Now</a>
+                                <a href="order.php?pro=<?php echo $product['id'];  ?>" class="btn btn-primary text-caps btn-rounded btn-framed">Order Now</a>
                           <?php
-                                }
+                                } }
 
                           ?>
                           

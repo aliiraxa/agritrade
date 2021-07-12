@@ -36,6 +36,7 @@
                 $category=$_POST['category'];
                 $about=$_POST['about'];
                 $city=$_POST['city'];
+                $stock=$_POST['stock'];
                 $district=$_POST['district'];
                 $street=$_POST['street'];
                 $img=$_FILES['img'];
@@ -54,7 +55,7 @@
 
                     if($imageOk==2)
                     {
-                        $results =$m->addProduct($title,$price,$name,$email,$phone,$category,$about,$city,$district,$street,$target_file,$oldEmail,$_FILES["img"]["tmp_name"]);
+                        $results =$m->addProduct($title,$price,$stock,$name,$email,$phone,$category,$about,$city,$district,$street,$target_file,$oldEmail,$_FILES["img"]["tmp_name"]);
                         echo "<script>alert('$results')</script>";
                         echo '<script>window.location.replace("seller_all_listing.php")</script>';
                     }else
@@ -96,7 +97,7 @@
                             <h2>Basic Information</h2>
 
                             <div class="row">
-                                <div class="col-md-8">
+                                <div class="col-md-5">
                                     <div class="form-group">
                                         <label for="title" class="col-form-label required">Title</label>
                                         <input name="title" type="text" class="form-control" id="title" placeholder="Title" required>
@@ -106,9 +107,16 @@
                                 <!--end col-md-8-->
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="price" class="col-form-label required">Price</label>
-                                        <input name="price" type="text" class="form-control" id="price" required>
+                                        <label for="price" class="col-form-label required">Price Per Kg</label>
+                                        <input name="price" type="number" class="form-control" onkeypress="return event.charCode >= 48" min="1" id="price" required>
                                         <span class="input-group-addon">PKR</span>
+                                    </div>
+                                    <!--end form-group-->
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="title" class="col-form-label required">Stock In KG</label>
+                                        <input name="stock" type="number" onkeypress="return event.charCode >= 48" min="1"  class="form-control" id="title" placeholder="Title" required>
                                     </div>
                                     <!--end form-group-->
                                 </div>

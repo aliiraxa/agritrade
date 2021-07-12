@@ -5,7 +5,21 @@ if (isset($_GET['delUser'])) {
     $user=new ManageAdmin();
     $id=$_GET['delUser'];
     $delCheck=$user->deleteUser($id);
-    echo "<script>location.replace('buyers.php');</script>";
+    echo "<script>location.replace('agent.php');</script>";
+
+
+}
+if(isset($_GET['app']))
+{
+    $user=new ManageAdmin();
+    $user->approved($_GET['app']);
+    echo "<script>location.replace('agent.php');</script>";
+}
+if(isset($_GET['re']))
+{
+    $user=new ManageAdmin();
+    $user->reject($_GET['re']);
+    echo "<script>location.replace('agent.php');</script>";
 }
 ?>
         <div id="page-wrapper">
@@ -53,7 +67,7 @@ if (isset($_GET['delUser'])) {
                                 <tbody>
                                 <?php
                                 $user=new ManageAdmin();
-                                     $getAll=$user->getBuyer();
+                                     $getAll=$user->getAgent();
 
                                      if ($getAll) {
                                     while ($result=$getAll->fetch_assoc()) {
@@ -73,7 +87,20 @@ if (isset($_GET['delUser'])) {
                                     <td><?php echo $result['address'] ?></td>
                                     <td><?php echo $result['email'] ?></td>
                                     <td><?php echo $result['password'] ?></td>
-                                    <td class="center"  style="text-align: center;">  <a class="btn btn-danger" onclick="return confirm('Are you sour to delete!')" href="buyers.php?delUser=<?php echo $result['id']; ?>"><i class="fa fa-remove"></i> Delete</a></td>
+                                    <td class="center"  style="text-align: center;">
+                                        <?php
+
+                                        if($result['status']==0)
+                                        {
+                                        ?>
+
+                                        <a class="btn btn-primary"  href="agent.php?app=<?php echo $result['id']; ?>"> Approved</a> <a class="btn btn-primary"  href="agent.php?re=<?php echo $result['id']; ?>"> Reject</a>
+
+                                        <?php
+                                        }
+
+                                        ?>
+                                        <a class="btn btn-danger" onclick="return confirm('Are you sour to delete!')" href="buyers.php?delUser=<?php echo $result['id']; ?>"><i class="fa fa-remove"></i> Delete</a></td>
                                 </tr>
                                      <?php }} ?>
                                 </tbody>

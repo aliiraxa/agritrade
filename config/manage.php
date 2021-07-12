@@ -33,7 +33,7 @@ Class Manage
 
     }
 
-    function addProduct($title,$price,$name,$email,$phone,$category,$about,$city,$district,$street,$img,$oldEmail,$temps)
+    function addProduct($title,$price,$stock,$name,$email,$phone,$category,$about,$city,$district,$street,$img,$oldEmail,$temps)
     {
 
         $getUser=$this->db->select("select * from users where email='$oldEmail'");
@@ -41,7 +41,7 @@ Class Manage
         $user_id=$getUsers['id'];
 
 
-        $this->db->insert("INSERT INTO product(user_id,title,price,name,email,phone,category,about,city,district,street,img) VALUES('$user_id','$title','$price','$name','$email','$phone','$category','$about','$city','$district','$street','$img')");
+        $this->db->insert("INSERT INTO product(user_id,title,price,stock,name,email,phone,category,about,city,district,street,img) VALUES('$user_id','$title','$price','$stock','$name','$email','$phone','$category','$about','$city','$district','$street','$img')");
         move_uploaded_file($temps,$img);
         return "Product Inserted";
     }
@@ -88,14 +88,14 @@ Class Manage
         return $this->db->select("select * from product where id='$id'");
     }
 
-    function editProduct($title,$price,$name,$email,$phone,$category,$about,$city,$district,$street,$id,$img=0,$temp=0)
+    function editProduct($title,$price,$stock,$name,$email,$phone,$category,$about,$city,$district,$street,$id,$img=0,$temp=0)
     {
         if(!$img)
-        $this->db->update("update product set title='$title',price='$price',name='$name',email='$email',phone='$phone',category='$category',about='$about',city='$city',district='$district',street='$street'  where id='$id'");
+        $this->db->update("update product set title='$title',stock='$stock',price='$price',name='$name',email='$email',phone='$phone',category='$category',about='$about',city='$city',district='$district',street='$street'  where id='$id'");
         else
         {
 
-            $this->db->update("update product set title='$title',price='$price',name='$name',email='$email',phone='$phone',category='$category',about='$about',city='$city',district='$district',street='$street',img='$img'   where id='$id'");
+            $this->db->update("update product set title='$title',price='$price',stock='$stock',name='$name',email='$email',phone='$phone',category='$category',about='$about',city='$city',district='$district',street='$street',img='$img'   where id='$id'");
             move_uploaded_file($temp,$img);
         }
 
@@ -169,6 +169,22 @@ Class Manage
     function getStoreByUser($id)
     {
         return $this->db->select("select * from store where user_id='$id'");
+    }
+
+    function getQTY($id)
+    {
+        $data=$this->db->select("select stock from product where id='$id'")->fetch_assoc();
+        return $data['stock'];
+    }
+
+    function orderNow($title,$price,$qty,$name,$email,$phone,$city,$district,$street,$oldEmail)
+    {
+        $getUser=$this->db->select("select * from users where email='$oldEmail'");
+        $getUsers=$getUser->fetch_assoc();
+        $getUsers['id'];
+
+        $this->db->insert("INSERT INTO tb_order ");
+
     }
 
 

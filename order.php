@@ -30,23 +30,34 @@
                     echo '<script>window.location.replace("index.php")</script>';
                 }
                 $m=new Manage();
+                $id=$_GET['pro'];
+                if(!isset($_GET['pro']))
+                {
+                    echo '<script>window.location.replace("index.php")</script>';
+                }
                 if(isset($_POST['add']))
                 {
                 $oldEmail=Session::get('email');
+
                 $title=$_POST['title'];
                 $price=$_POST['price'];
+                $qty=$_POST['qty'];
                 $name=$_POST['name'];
                 $email=$_POST['email'];
                 $phone=$_POST['phone'];
-                $category=$_POST['category'];
-                $about=$_POST['about'];
                 $city=$_POST['city'];
                 $district=$_POST['district'];
                 $street=$_POST['street'];
-                $img=$_FILES['img'];
-                $size=$img['size'];
+
+                    orderNow($title,$price,$qty,$name,$email,$phone,$city,$district,$street,$oldEmail);
+
 
                 }
+
+
+                $pro=$m->getProductById($id);
+                $products=$pro->fetch_assoc();
+
 
 
 
@@ -55,7 +66,7 @@
                 <!--============ Page Title =========================================================================-->
                 <div class="page-title">
                     <div class="container">
-                        <h1>Add Product</h1>
+                        <h1>Add Order</h1>
                     </div>
                     <!--end container-->
                 </div>
@@ -79,18 +90,36 @@
                             <h2>Basic Information</h2>
 
                             <div class="row">
-                                <div class="col-md-8">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="title" class="col-form-label required">Title</label>
-                                        <input name="title" type="text" class="form-control" id="title" placeholder="Title" required>
+                                        <input name="title" type="text" readonly value="<?php echo $products['title']; ?>" class="form-control" id="title" placeholder="Title" required>
+                                        <input name="dsfas" type="hidden" readonly value="<?php echo $products['id']; ?>" class="form-control" id="id"  >
+
                                     </div>
                                     <!--end form-group-->
                                 </div>
                                 <!--end col-md-8-->
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="price" class="col-form-label required">Price</label>
-                                        <input name="price" type="text" class="form-control" id="price" required>
+                                        <input name="price" type="text" value="<?php echo $products['price']; ?>" readonly class="form-control" id="price" required>
+                                        <span class="input-group-addon">PKR</span>
+                                    </div>
+                                    <!--end form-group-->
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="price" class="col-form-label required">QTY</label>
+                                        <input name="qty" type="number" value="1" onkeyup="calPrice()" onkeypress="return event.charCode >= 48" min="1"  class="form-control" id="qty" required>
+
+                                    </div>
+                                    <!--end form-group-->
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="price" class="col-form-label required">Total Price</label>
+                                        <input name="totalPrice" type="text" value="<?php echo $products['price']; ?>" readonly class="form-control" id="totalPrice" required>
                                         <span class="input-group-addon">PKR</span>
                                     </div>
                                     <!--end form-group-->
@@ -164,7 +193,7 @@
 
                         <section class="clearfix">
                             <div class="form-group">
-                                <button type="submit" name="add" class="btn btn-primary large icon float-right">Save Product<i class="fa fa-chevron-right"></i></button>
+                                <button type="submit" name="add"  class="btn btn-primary large icon float-right">Order<i class="fa fa-chevron-right"></i></button>
                             </div>
                         </section>
                     </form>
@@ -185,3 +214,41 @@
 include_once "includes/footer.php";
 
 ?>
+        <script>
+
+            function  calPrice()
+            {
+                var qty=document.getElementById("qty").value;
+                var price=document.getElementById('price').value;
+
+                var id=document.getElementById('id').value;
+                $(document).ready(function() {
+                    var response = '';
+                    $.ajax({
+                        type: "POST",
+                        url: "config/record.php",
+                        data: {name: id},
+                        async: false,
+                        success: function(text) {
+                            response = text;
+                        }
+                    });
+                    if(parseInt(response)>parseInt(qty))
+                    {
+                        document.getElementById('totalPrice').value = qty * price;
+                    }
+                    else
+                    {
+                        document.getElementById("qty").value = "1";
+                        document.getElementById('totalPrice').value = price;
+                        alert('Stock Is less than Your QTY Available Stock:'+response);
+
+                    }
+                });
+            }
+
+
+
+
+
+        </script>

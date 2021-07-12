@@ -3,7 +3,7 @@
 <?php include('classes/Route.php') ?>
 <?php
 if (!isset($_GET['editRoute']) || $_GET['editRoute']==NULL) {
-    echo "<script>window.location='viewRoute.php'</script>";
+    echo "<script>window.location='stores.php'</script>";
 }else
 {
 
@@ -57,7 +57,7 @@ if (!isset($_GET['editRoute']) || $_GET['editRoute']==NULL) {
                                             <input class="form-control" name="routeAddress" pattern="[a-z, ,A-Z]+" required value="<?php echo $result1['route_address'] ?>" placeholder="Enter Route Address" />
                                         </div>
                                         <button type="submit" class="btn btn-primary" name="updateRoute"><i class="fa fa-sign-out fa-fw"></i> Save</button>
-                                        <a href="viewRoute.php" class="btn btn-danger"><i class="fa fa-remove" aria-hidden="true"></i> Cancel</a>
+                                        <a href="stores.php" class="btn btn-danger"><i class="fa fa-remove" aria-hidden="true"></i> Cancel</a>
                                     </form>
                                             <?php } ?>
                         </div>

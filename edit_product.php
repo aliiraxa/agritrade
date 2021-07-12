@@ -50,6 +50,7 @@
                 $district=$_POST['district'];
                 $street=$_POST['street'];
                 $img=$_FILES['img'];
+                    $stock=$_FILES['stock'];
                 $newPic=$_FILES["img"]["name"];
 
 
@@ -69,7 +70,7 @@
                         echo "getting pic";
                         if($imageOk==2)
                         {
-                            $m->editProduct($title,$price,$name,$email,$phone,$category,$about,$city,$district,$street,$id,$target_file,$_FILES["img"]["tmp_name"]);
+                            $m->editProduct($title,$price,$stock,$name,$email,$phone,$category,$about,$city,$district,$street,$id,$target_file,$_FILES["img"]["tmp_name"]);
                             echo "<script>alert('Product Updated')</script>";
                             echo "<script>location.replace('seller_all_listing.php');</script>";
                             //$results =$m->addProduct($title,$price,$name,$email,$phone,$category,$about,$city,$district,$street,$target_file,$oldEmail,$_FILES["img"]["tmp_name"]);
@@ -84,7 +85,7 @@
                     }else
                     {
 
-                        $m->editProduct($title,$price,$name,$email,$phone,$category,$about,$city,$district,$street,$id);
+                        $m->editProduct($title,$price,$stock,$name,$email,$phone,$category,$about,$city,$district,$street,$id);
                         echo "<script>alert('Product Updated')</script>";
                         echo "<script>location.replace('seller_all_listing.php');</script>";
 
@@ -126,7 +127,7 @@
                             <h2>Basic Information</h2>
 
                             <div class="row">
-                                <div class="col-md-8">
+                                <div class="col-md-5">
                                     <div class="form-group">
                                         <label for="title" class="col-form-label required">Title</label>
                                         <input name="title" type="text" class="form-control" id="title" value="<?php echo $product['title'];?>" placeholder="Title" required>
@@ -136,9 +137,17 @@
                                 <!--end col-md-8-->
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="price" class="col-form-label required">Price</label>
-                                        <input name="price" type="text" class="form-control"  value="<?php echo $product['price'];?>" id="price" required>
+                                        <label for="price" class="col-form-label required">Price Per KG</label>
+                                        <input name="price" type="number" onkeypress="return event.charCode >= 48" class="form-control"  value="<?php echo $product['price'];?>" id="price" required>
                                         <span class="input-group-addon">PKR</span>
+                                    </div>
+                                    <!--end form-group-->
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="title" class="col-form-label required">Stock Per KG</label>
+                                        <input name="stock" type="number" onkeypress="return event.charCode >= 48" class="form-control" id="title" value="<?php echo $product['stock'];?>" placeholder="Title" required>
                                     </div>
                                     <!--end form-group-->
                                 </div>
