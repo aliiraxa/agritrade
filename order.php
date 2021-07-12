@@ -48,10 +48,11 @@
                 $city=$_POST['city'];
                 $district=$_POST['district'];
                 $street=$_POST['street'];
+                $id=$_POST['id'];
 
-                    orderNow($title,$price,$qty,$name,$email,$phone,$city,$district,$street,$oldEmail);
+                   $m->orderNow($title,$price,$qty,$name,$email,$phone,$city,$district,$street,$oldEmail,$id);
 
-
+                    echo '<script>window.location.replace("buyer_orders.php")</script>';
                 }
 
 
@@ -94,7 +95,7 @@
                                     <div class="form-group">
                                         <label for="title" class="col-form-label required">Title</label>
                                         <input name="title" type="text" readonly value="<?php echo $products['title']; ?>" class="form-control" id="title" placeholder="Title" required>
-                                        <input name="dsfas" type="hidden" readonly value="<?php echo $products['id']; ?>" class="form-control" id="id"  >
+                                        <input name="id" type="hidden" readonly value="<?php echo $products['id']; ?>" class="form-control" id="id"  >
 
                                     </div>
                                     <!--end form-group-->

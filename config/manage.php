@@ -177,14 +177,49 @@ Class Manage
         return $data['stock'];
     }
 
-    function orderNow($title,$price,$qty,$name,$email,$phone,$city,$district,$street,$oldEmail)
+    function orderNow($title,$price,$qty,$name,$email,$phone,$city,$district,$street,$oldEmail,$id)
     {
-        $getUser=$this->db->select("select * from users where email='$oldEmail'");
-        $getUsers=$getUser->fetch_assoc();
-        $getUsers['id'];
 
-        $this->db->insert("INSERT INTO tb_order ");
 
+        $address=$street.", ".$city." ".$district;
+
+        $pro=$this->db->select("select * from product where id='$id'");
+        $product=$pro->fetch_assoc();
+        $sName= $product['name'];
+        $sEmail=$product['email'];
+        $Phone=$product['phone'];
+
+        $this->db->insert("INSERT INTO tb_order(order_date,product_name,product_price,product_qty,seller_name,sellery_email,sellery_phone,buyer_name,buyer_email,buyer_phone,delivery_address,order_user_email,status) VALUES(NOW(),'$title','$price','$qty','$sName','$sEmail','$Phone','$name','$email','$phone','$address','$oldEmail',0)");
+
+    }
+
+    function getOrders($email)
+    {
+        return $this->db->select("select * from tb_order where order_user_email='$email' ORDER BY id DESC");
+    }
+    function getSellersOrders($email)
+    {
+        return $this->db->select("select * from tb_order where sellery_email='$email' ORDER BY id DESC");
+    }
+
+    function getOrdersById($id)
+    {
+        return $this->db->select("select * from tb_order where id='$id'");
+    }
+
+    function getAgents()
+    {
+        return $this->db->select("select * from users where role=3 AND status=1");
+    }
+
+    function assignAgent($id,$agent)
+    {
+        $order=$this->db->select("select * from users where id='$agent' ");
+        $orders=$order->fetch_assoc();
+        $name=$orders['name'];
+        $phone=$orders['phone'];
+
+        $this->db->update("update tb_order set status=1, agent_name='$name',agent_number='$phone' where id='$id'");
     }
 
 

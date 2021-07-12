@@ -26,12 +26,16 @@
                 <?php include_once "config/manage.php"; ?>
                 <?php
                     $m=new Manage();
-                    $record=$m->getProductBySellerId(Session::get('email'));
+                    if(Session::get('role')==1)
+                    {
+                        $record=$m->getSellersOrders(Session::get('email'));
+                    }else
+                    {
+                        $record=$m->getOrders(Session::get('email'));
+                    }
 
-                            if(!Session::get('role')==2)
-                            {
-                                echo "<script>location.replace('index.php');</script>";
-                            }
+
+
 
 
                 ?>
@@ -67,10 +71,12 @@
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Title</th>
-                            <th>Buyer Name</th>
-                            <th>Contact No</th>
-                            <th>Email</th>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Status</th>
+                            <th>Agent</th>
+                            <th>Agent No.</th>
+                            <th>Received.</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -84,12 +90,44 @@
                         ?>
                         <tr>
                             <td><?php  echo $records['id']; ?></td>
-                            <td><?php  echo $records['title']; ?></td>
-                            <td><img src="<?php  echo $records['img']; ?>" width="150"></td>
-                            <td><?php  echo $records['name']; ?></td>
-                            <td><?php  echo $records['email']; ?></td>
-                            <td><?php  echo $records['city']; ?></td>
-                            <td><a class="btn btn-info" href="edit_product.php?id=<?php  echo $records['id']; ?>">View</a> <a class="btn btn-primary" href="seller_all_listing.php?id=<?php  echo $records['id']; ?>">Delete</a></td>
+                            <td><?php  echo $records['product_name']; ?></td>
+                            <td><?php  echo $records['product_price']; ?></td>
+                            <td>
+
+                                <?php
+                                if($records['status']==0)
+                                    {
+                                        echo "<b style='color:red;'>Not a Full Fill</b>";
+                                    }else  if($records['status']==1)
+                                        echo "Full Filled";
+                                else
+                                    echo "Order Cancel";
+
+                                ?>
+
+                            </td>
+                            <td><?php
+                                if($records['agent_name'])
+                                {
+                                    echo $records['agent_name'];
+                                }else
+                                    echo "<b style='color:red;'>Awaiting For Agent</b>";
+                                ?></td>
+                            <td><?php  echo $records['agent_number']; ?></td>
+                            <td><?php
+                                if($records['receive_date']!="0000-00-00")
+                                echo $records['receive_date'];
+                                else
+                                    echo "<b style='color:red;'>Not Yet</b>";
+                                ?></td>
+                            <td><a class="btn btn-info" href="view_order.php?id=<?php  echo $records['id']; ?>">View</a>
+                                 <?php
+                            if(Session::get('role')==1 && (!$records['agent_name']))
+                            {
+                                ?>
+                                <a class="btn btn-info" href="assign_agent.php?id=<?php  echo $records['id']; ?>">Assign Agent</a>
+                            <?php } ?>
+                            </td>
                         </tr>
                         <?php
 

@@ -99,11 +99,11 @@ Session::init();
                             <?php } ?>
 
                             <?php
-                            if(Session::get('role')==2)
+                            if(Session::get('role')==2 || Session::get('role')==1)
                             {
                                 ?>
                                 <li class="nav-item">
-                                    <a href="buyer_orders.php" class="nav-link">Buyer Order</a>
+                                    <a href="buyer_orders.php" class="nav-link">View Orders</a>
                                 </li>
                             <?php } ?>
                             <li class="nav-item">
