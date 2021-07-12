@@ -222,6 +222,11 @@ Class Manage
         $this->db->update("update tb_order set status=1, agent_name='$name',agent_number='$phone' where id='$id'");
     }
 
+    function orderReceived($id)
+    {
+        $this->db->update("update tb_order set receive_date=NOW() where id='$id'");
+    }
+
 
 
 

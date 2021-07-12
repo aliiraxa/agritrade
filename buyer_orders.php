@@ -34,6 +34,12 @@
                         $record=$m->getOrders(Session::get('email'));
                     }
 
+                    if(isset($_GET['rec']))
+                    {
+                        $m->orderReceived($_GET['rec']);
+                        echo '<script>window.location.replace("buyer_orders.php")</script>';
+                    }
+
 
 
 
@@ -126,6 +132,12 @@
                             {
                                 ?>
                                 <a class="btn btn-info" href="assign_agent.php?id=<?php  echo $records['id']; ?>">Assign Agent</a>
+                            <?php } ?>
+                             <?php
+                            if(Session::get('role')==2 && ($records['agent_name']) && $records['receive_date']=="0000-00-00")
+                            {
+                                ?>
+                                 <a class="btn btn-info" href="buyer_orders.php?rec=<?php  echo $records['id']; ?>">Oder Received</a>
                             <?php } ?>
                             </td>
                         </tr>
