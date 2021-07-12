@@ -57,7 +57,7 @@ Session::init();
                         <a class="nav-link" href="sellers.php">Sellers</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Stores</a>
+                        <a class="nav-link" href="stores.php">Zari Stores</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="contact.php">Contact</a>
@@ -79,6 +79,23 @@ Session::init();
                             <li class="nav-item">
                                 <a href="seller_all_listing.php" class="nav-link">My Listing</a>
                             </li>
+                            <?php } ?>
+                            <?php
+                            if(Session::get('role')==4)
+                            {
+                                ?>
+                                <li class="nav-item">
+                                    <a href="submit_store.php" class="nav-link">My Store</a>
+                                </li>
+                            <?php } ?>
+
+                            <?php
+                            if(Session::get('role')==3)
+                            {
+                                ?>
+                                <li class="nav-item">
+                                    <a href="agent.php" class="nav-link">Apply For Transport Agent</a>
+                                </li>
                             <?php } ?>
 
                             <?php

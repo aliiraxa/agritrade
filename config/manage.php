@@ -9,6 +9,7 @@ Class Manage
         $this->db = new Database();
 
     }
+
     function checkImage($target_file,$size)
     {
 
@@ -132,6 +133,42 @@ Class Manage
        }
 
 
+    }
+
+    function applyForAgent($email)
+    {
+        return $this->db->update("update users set status='0' where email='$email'");
+    }
+
+    function getStatus($email)
+    {
+        return $this->db->select("select * from users where status=0 AND email='$email'")->fetch_assoc();
+    }
+    function getStores()
+    {
+        return $this->db->select("select * from store");
+    }
+
+    function checkStore($email)
+    {
+        return $this->db->select("select * from store where email='$email'");
+    }
+
+    function submitStoreInfo($title,$email,$phone,$city,$district,$street,$userId)
+    {
+        $result=$this->db->select("select * from store where user_id='$userId'");
+        if($result)
+        {
+            $this->db->update("Update  store set name='$title',city='$city',district='$district',street='$street',phone='$phone',email='$email' where user_id='$userId'");
+        }else
+        {
+            $this->db->insert("INSERT INTO store(name,city,district,street,phone,email,user_id) VALUES('$title','$city','$district','$street','$phone','$email','$userId')");
+        }
+    }
+
+    function getStoreByUser($id)
+    {
+        return $this->db->select("select * from store where user_id='$id'");
     }
 
 

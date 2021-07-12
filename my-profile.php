@@ -243,8 +243,8 @@
                                                             <?php } ?>
                                                             <option><?php  echo $userData['title']; ?></option>
                                                             <option value="">-------------</option>
-                                                            <option value="1">Mrs</option>
-                                                            <option value="2">Mr</option>
+                                                            <option>Mrs</option>
+                                                            <option>Mr</option>
                                                         </select>
                                                     </div>
                                                     <!--end form-group-->

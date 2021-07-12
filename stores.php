@@ -26,18 +26,10 @@
                 <?php include_once "config/manage.php"; ?>
                 <?php
                     $m=new Manage();
-                    $record=$m->getProductBySellerId(Session::get('email'));
+                    $record=$m->getStores();
 
-                            if(Session::get('role')!=1)
-                            {
-                                echo "<script>location.replace('index.php');</script>";
-                            }
-                    if(isset($_GET['id']))
-                    {
-                        $id=$_GET['id'];
-                        $delCheck=$m->deleteProduct($id);
-                        echo "<script>location.replace('seller_all_listing.php');</script>";
-                    }
+
+
 
 
                 ?>
@@ -48,11 +40,9 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-6">
-                                <h1>Product Listing</h1>
+                                <h1>Stores Listing</h1>
                             </div>
-                            <div class="col-md-6">
-                               <a href="submit.php"><button class="pull-right btn btn-primary text-caps btn-rounded btn-framed">Add product</button></a>
-                            </div>
+
                         </div>
                     </div>
                     <!--end container-->
@@ -76,11 +66,11 @@
                         <tr>
                             <th>ID</th>
                             <th>Title</th>
-                            <th>Pic</th>
-                            <th>Name</th>
                             <th>Email</th>
+                            <th>Phone</th>
                             <th>City</th>
-                            <th>Action</th>
+                            <th>District</th>
+                            <th>Street</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -93,12 +83,12 @@
                         ?>
                         <tr>
                             <td><?php  echo $records['id']; ?></td>
-                            <td><?php  echo $records['title']; ?></td>
-                            <td><img src="<?php  echo $records['img']; ?>" width="150"></td>
                             <td><?php  echo $records['name']; ?></td>
                             <td><?php  echo $records['email']; ?></td>
+                            <td><?php  echo $records['phone']; ?></td>
                             <td><?php  echo $records['city']; ?></td>
-                            <td><a class="btn btn-info" href="edit_product.php?id=<?php  echo $records['id']; ?>">View</a> <a class="btn btn-primary" href="seller_all_listing.php?id=<?php  echo $records['id']; ?>">Delete</a></td>
+                            <td><?php  echo $records['district']; ?></td>
+                            <td><?php  echo $records['street']; ?></td>
                         </tr>
                         <?php
 
