@@ -55,7 +55,7 @@ ob_start();
                 <a href="#"><i class="glyphicon glyphicon-sort-by-order-alt" aria-hidden="true"></i> Orders<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="viewBus.php">View Orders</a>
+                        <a href="orders.php">View Orders</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->
@@ -64,7 +64,7 @@ ob_start();
 
 
             <li>
-                <a href="entryReport.php"><i class="fa fa-bar-chart fa-fw"></i> Billing Report</a>
+                <a href="generateReport.php"><i class="fa fa-bar-chart fa-fw"></i> Billing Report</a>
             </li>
         </ul>
     </div>

@@ -75,6 +75,41 @@ class ManageAdmin
         unlink('../'.$data['img']);
     }
 
+    function getAllOrder()
+    {
+        return $this->db->select("select * from tb_order");
+    }
+
+    function deleteOrder($id)
+    {
+        $this->db->delete("delete from tb_order where id='$id'");
+    }
+    function CancelOrder($id)
+    {
+        return $this->db->update("update tb_order set status=2 where id='$id'");
+    }
+
+    function getOrderById($id)
+    {
+        return $this->db->select("select * from tb_order where id='$id'");
+    }
+
+    public function getByBothDate($sdate,$edate)
+    {
+        $query="SELECT *FROM tb_order where order_date>='$sdate' && order_date<='$edate'";
+        $result=$this->db->select($query);
+        if($result)
+            return $result;
+        else return false;
+    }
+
+    public function getByDate($date)
+    {
+        $query="SELECT *FROM tb_order where order_date='$date'";
+        $result=$this->db->select($query);
+        return $result;
+    }
+
 
 
 }

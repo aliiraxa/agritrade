@@ -128,13 +128,13 @@
                                 ?></td>
                             <td><a class="btn btn-info" href="view_order.php?id=<?php  echo $records['id']; ?>">View</a>
                                  <?php
-                            if(Session::get('role')==1 && (!$records['agent_name']))
+                            if(Session::get('role')==1 && (!$records['agent_name']) && ($records['status']!=2))
                             {
                                 ?>
                                 <a class="btn btn-info" href="assign_agent.php?id=<?php  echo $records['id']; ?>">Assign Agent</a>
                             <?php } ?>
                              <?php
-                            if(Session::get('role')==2 && ($records['agent_name']) && $records['receive_date']=="0000-00-00")
+                            if(Session::get('role')==2 && ($records['agent_name']) && $records['receive_date']=="0000-00-00" && ($records['status']!=2))
                             {
                                 ?>
                                  <a class="btn btn-info" href="buyer_orders.php?rec=<?php  echo $records['id']; ?>">Oder Received</a>
