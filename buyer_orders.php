@@ -79,6 +79,8 @@
                             <th>ID</th>
                             <th>Product</th>
                             <th>Price</th>
+                            <th>QTY</th>
+                            <th>Total</th>
                             <th>Status</th>
                             <th>Agent</th>
                             <th>Agent No.</th>
@@ -98,6 +100,8 @@
                             <td><?php  echo $records['id']; ?></td>
                             <td><?php  echo $records['product_name']; ?></td>
                             <td><?php  echo $records['product_price']; ?></td>
+                            <td><?php  echo $records['product_qty']; ?></td>
+                            <td><?php  echo $records['product_price']*$records['product_qty']. "PKR"; ?></td>
                             <td>
 
                                 <?php
